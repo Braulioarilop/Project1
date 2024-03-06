@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Main {
 
@@ -14,6 +15,7 @@ public class Main {
             System.out.println("3. Salir del programa");
 
             opcion = in.nextLine();
+
             switch(opcion){
                 case "1":
                     String passwd;
@@ -40,7 +42,11 @@ public class Main {
         }while(!salir);
     };
     public static void main(String[] args) {
-        Main.menu();
+        try {
+            Main.menu();
+        }catch (NoSuchElementException nsee){
+        }
+        System.out.println("Programa finalizado por error");
 
     }
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.lang.Thread;
 import java.util.Collection;
 public class Administrador {
     public static final String contraseña = "1234A";
@@ -17,7 +18,7 @@ public class Administrador {
             System.out.println("3. \t Listar Departamentos");
             System.out.println("4. \t Crear nueva sala");
             System.out.println("5. \t Eliminar sala");
-            System.out.println("6. \t Añdir Departamento");
+            System.out.println("6. \t Listar Salas");
             System.out.println("7. \t Cerrar sesion");
             opcionAdmin = in.nextLine();
             switch(opcionAdmin){
@@ -64,8 +65,15 @@ public class Administrador {
         Departamento d1 = new Departamento(nombre,codigo,representante);
         departamentos.add(d1);
     }
-    public static void eliminarDep(String nombre){
-        departamentos.remove();
+    public static void eliminarDep(String codigo){
+        if (buscarDep(codigo)!=null){
+            Departamento d1 = buscarDep(codigo);
+            departamentos.remove(d1);
+            System.out.println("Borrado exitoso");
+
+        }else{
+            System.out.println("No se a encontrado el departamento");
+        }
 
     }
     public static void listarDep(){
@@ -73,18 +81,17 @@ public class Administrador {
             System.out.println(o);
         }
     }
-    public static Departamento buscar(String codigo) {
+    public static Departamento buscarDep(String codigo) {
         Iterator iterador = departamentos.iterator();
         boolean esIgual=false;
         do {
             Departamento d1 =(Departamento) iterador.next();
             if (d1.getCodigo().equalsIgnoreCase(codigo)){
-                esIgual=true;
+                return d1;
             }
         }while(iterador.hasNext());
-        return esIgual;
+        return null;
     }
-    public static
 }
 
 
