@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Departamento {
-    private String nombre;
-    private String codigo;
-    private String representante;
+    private static String nombre;
+    public static String codigo ="123B1";
+    private static String representante;
 
     public Departamento(String nombre, String codigo, String representante) {
         this.nombre = nombre;
@@ -11,9 +13,11 @@ public class Departamento {
         this.representante = representante;
     }
 
-    public void menuDep() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
+    public static  void menuDep() {
+        Scanner in = new Scanner(System.in);
+        boolean logout =false;
+        
+        int opcionDep = 0;
 
         do {
             System.out.println("\nMenú del Departamento " + nombre);
@@ -21,10 +25,9 @@ public class Departamento {
             System.out.println("2. Cambiar representante");
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
-
-            opcion = scanner.nextInt();
-
-            switch (opcion) {
+            
+           
+            switch (opcionDep) {
                 case 1:
                     System.out.println("Nombre: " + nombre);
                     System.out.println("Código: " + codigo);
@@ -32,8 +35,8 @@ public class Departamento {
                     break;
                 case 2:
                     System.out.print("Ingrese el nuevo representante: ");
-                    scanner.nextLine(); // Limpiar el buffer del scanner
-                    representante = scanner.nextLine();
+                    in.nextLine();
+                    representante = in.nextLine();
                     System.out.println("Representante cambiado con éxito a: " + representante);
                     break;
                 case 3:
@@ -42,11 +45,20 @@ public class Departamento {
                 default:
                     System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
-        } while (opcion != 3);
+        } while (opcionDep!=3);
+        in.close();
     }
 
     public static void main(String[] args) {
-        Departamento departamento = new Departamento("Departamento de Informática", "INF001", "Juan Pérez");
+        Departamento departamento = new Departamento("Departamento de informatica", "INF1", "Jorge Sanchez");
         departamento.menuDep();
+    }
+
+    public String getNombre() {
+        return null;
+    }
+
+    public String getCodigo() {
+        return null;
     }
 }
