@@ -7,13 +7,15 @@ public class Main {
 
         //Centinela que nos permitirá salir
         boolean salir = false;
-        String opcion;
+
+
+        System.out.println("Bienvenido a la aplicación \n ¿Como desea acceder?");
         while(!salir){
-            System.out.println("Bienvenido a la aplicación \n ¿Como desea acceder?");
+            String opcion;
             System.out.println("1. Login de administrador");
             System.out.println("2. Login de departamento");
             System.out.println("3. Salir del programa");
-
+            System.out.println();
             opcion = in.nextLine();
 
             switch(opcion){
@@ -28,7 +30,15 @@ public class Main {
                     }
                     break;
                 case "2":
-                    System.out.println("Has seleccionado la opcion 2");
+                    String codigoDep;
+                    System.out.println("Indicame el codigo del departamento:");
+                    codigoDep = in.nextLine();
+                    Departamento d2 = Administrador.buscarCodDep(codigoDep);
+                    if (d2!=null){
+                        Departamento.menuDep();
+                    }else{
+                        System.out.println("Codigo de departamento no existente");
+                    }
                     break;
                 case "3":
                     System.out.println("Saliendo");
@@ -41,8 +51,6 @@ public class Main {
         };
     };
     public static void main(String[] args) {
-
             Main.menu();
-
     }
 }

@@ -10,7 +10,7 @@ public class Departamento {
         this.representante = representante;
     }
 
-    public void menuDep() {
+    public static void menuDep() {
         Scanner in = new Scanner(System.in);
         String opcionDep;
         boolean salirDep = false;

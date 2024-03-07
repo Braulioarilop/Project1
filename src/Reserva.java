@@ -20,4 +20,17 @@ public class Reserva {
     public String getNombreSala() {
         return nombreSala;
     }
+
+    public Duration getDuracion() {
+        return duracionReserva;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "nombreSala='" + nombreSala + '\'' +
+                ", fecha=" + fechaReserva +
+                ", duracion=" + duracionReserva.toHours() + " horas" +
+                '}';
+    }
 }

@@ -14,7 +14,7 @@ public class Sala {
 
     public void reservar(String nombreSala, LocalDateTime fecha, Duration duracion){
         Reserva r1 = new Reserva(nombreSala,fecha,duracion);
-        if (!buscarResIgual(nombreSala,fecha)) {
+        if (!buscarResIgualTrue(nombreSala,fecha)) {
             reservas.add(r1);
         }else{
             System.out.println("Ya hay una reserva esa hora");
@@ -22,9 +22,16 @@ public class Sala {
         }
     }
 
-    public boolean buscarResIgual(String nombreSala, LocalDateTime fecha){
-        boolean esigual = Administrador.buscarSala(nombreSala);
-        if (esigual==false) {
+    public void listarReservas() {
+        System.out.println("Reservas de la sala " + nombre + ":");
+        for (Object o : reservas) {
+            System.out.println(o);
+        }
+    }
+
+    public boolean buscarResIgualTrue(String nombreSala, LocalDateTime fecha){
+        boolean esigual = Administrador.buscarSalaTrue(nombreSala);
+        if (esigual==true) {
             Iterator iterator = reservas.iterator();
             while (iterator.hasNext()){
                 Reserva r1 = (Reserva) iterator.next();
@@ -38,5 +45,11 @@ public class Sala {
 
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public String toString() {
+        String sala = "Nombre de la sala: " + nombre;
+        return sala;
     }
 }

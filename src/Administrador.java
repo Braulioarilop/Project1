@@ -1,3 +1,4 @@
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,8 +45,24 @@ public class Administrador {
                     listarDep();
                     break;
                 case "4":
+                    String nombresala;
+                    System.out.println("Indicame el nombre de la sala");
+                    nombresala = in.nextLine();
+                    if (!buscarSalaTrue(nombresala)){
+                        Sala s1 = new Sala(nombresala);
+                    }else{
+                        System.out.println("Sala ya existente");
+                    }
                     break;
                 case "5":
+                    String salaAEliminar;
+                    System.out.println("Indicame el nombre de la sala a eliminar");
+                    salaAEliminar = in.nextLine();
+                    if (buscarSalaTrue(salaAEliminar)){
+                        salas.remove(buscarSalaID(salaAEliminar));
+                    }else{
+                        System.out.println("Sala ya existente");
+                    }
                     break;
                 case "6":
                     break;
@@ -90,13 +107,12 @@ public class Administrador {
 
     public static Departamento buscarCodDep(String codigo) {
         Iterator iterador = departamentos.iterator();
-        boolean esIgual = false;
-        do {
+        while (iterador.hasNext()){
             Departamento d1 = (Departamento) iterador.next();
             if (d1.getCodigo().equalsIgnoreCase(codigo)) {
                 return d1;
             }
-        } while (iterador.hasNext());
+        }
         return null;
     }
 
@@ -111,9 +127,8 @@ public class Administrador {
         return false;
     }
 
-    public static boolean buscarSala(String nombre) {
+    public static boolean buscarSalaTrue(String nombre) {
         Iterator iterador = salas.iterator();
-        boolean esIgual = false;
         while (iterador.hasNext()) {
             Sala s1 = (Sala) iterador.next();
             if (s1.getNombre().equalsIgnoreCase(nombre)) {
@@ -121,6 +136,23 @@ public class Administrador {
             }
         }
         return false;
+    }
+
+    public static Sala buscarSalaID(String nombre) {
+        Iterator iterador = salas.iterator();
+        do {
+            Sala s1 = (Sala) iterador.next();
+            if (s1.getNombre().equalsIgnoreCase(nombre)) {
+                return s1;
+            }
+        } while (iterador.hasNext());
+        return null;
+    }
+
+    public static void listarSalas(){
+        for (Object o : salas) {
+            System.out.println(o);
+        }
     }
 }
 
