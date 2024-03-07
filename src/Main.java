@@ -8,7 +8,7 @@ public class Main {
         //Centinela que nos permitirá salir
         boolean salir = false;
         String opcion;
-        do {
+        while(!salir){
             System.out.println("Bienvenido a la aplicación \n ¿Como desea acceder?");
             System.out.println("1. Login de administrador");
             System.out.println("2. Login de departamento");
@@ -38,15 +38,11 @@ public class Main {
                 System.out.println("No has indicado una opcion correcta");
                     break;
             }
-
-        }while(!salir);
+        };
     };
     public static void main(String[] args) {
-        try {
+
             Main.menu();
-        }catch (NoSuchElementException nsee){
-        }
-        System.out.println("Programa finalizado por error");
 
     }
 }

@@ -38,6 +38,10 @@ public class Departamento {
         return codigo;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     @Override
     public String toString() {
         String DepartaCom = "Nombre de departamento: "+ nombre +
