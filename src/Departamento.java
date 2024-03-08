@@ -1,8 +1,12 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Scanner;
 public class Departamento {
     private String nombre;
     private String codigo;
     private String representante;
+    public static String codMenuDep;
 
     public Departamento(String nombre, String codigo, String representante) {
         this.nombre = nombre;
@@ -25,7 +29,43 @@ public class Departamento {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
+                    String salaAReservar;
+                    LocalDateTime fechaDeReserva;
+                    int mes;
+                    int dia;
+                    int horaR;
+                    int horaD;
+                    Duration durationDeReserva;
+                    System.out.println("Dime la sala en la cual quieras realizar una reserva:");
+                    salaAReservar = scanner.nextLine();
+                    if (Administrador.buscarSalaTrue(salaAReservar)){
+                        Sala s1 = Administrador.buscarSalaID(salaAReservar);
 
+                        System.out.println("Datos de Reserva");
+                        System.out.println("Mes: (Febrero = 2,etc):");
+                        mes= Integer.parseInt(scanner.nextLine());
+                        System.out.println("Dia: (Numerico)");
+                        dia= Integer.parseInt(scanner.nextLine());
+                        System.out.println("Hora: (Disponible desde las 9 hasta las 14 horas)");
+                        horaR= Integer.parseInt(scanner.nextLine());
+                        while (horaR<9 || horaR>14){
+                            System.out.println("Hora de trabajo no disponible");
+                            System.out.println("Hora: (Disponible desde las 9 hasta las 14 horas)");
+                            horaR= Integer.parseInt(scanner.nextLine());
+                        }
+
+                        System.out.println("Duracion de la reserva: ");
+                        horaD = Integer.parseInt(scanner.nextLine());
+                        durationDeReserva = Duration.ofHours(horaD);
+                        fechaDeReserva = LocalDateTime.of(2024,mes,dia,horaR,0);
+                        if (!s1.buscarResIgualTrue(salaAReservar,fechaDeReserva)) {
+                            s1.reservar(salaAReservar, fechaDeReserva, durationDeReserva,codMenuDep);
+                        }else{
+                            System.out.println("Reserva igual ya existente");
+                        }
+                    }else{
+                        System.out.println("La sala a reservar no existe");
+                    }
                     break;
                 case 2:
 
@@ -59,7 +99,5 @@ public class Departamento {
         return DepartaCom;
     }
 
-    public void listarSalasConReservas(){
-        Administrador.listarSalas();
-    }
+
 }

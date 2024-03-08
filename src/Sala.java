@@ -5,15 +5,17 @@ import java.util.Iterator;
 
 public class Sala {
     public String nombre;
+    public String codSala;
     public ArrayList reservas;
 
-    public Sala(String nombre){
+    public Sala(String nombre,String codSala){
         this.nombre = nombre;
+        this.codSala=codSala;
         ArrayList reservas = new ArrayList();
     }
 
-    public void reservar(String nombreSala, LocalDateTime fecha, Duration duracion){
-        Reserva r1 = new Reserva(nombreSala,fecha,duracion);
+    public void reservar(String nombreSala, LocalDateTime fecha, Duration duracion,String nombreDepReservador){
+        Reserva r1 = new Reserva(nombreSala,fecha,duracion,nombreDepReservador);
         if (!buscarResIgualTrue(nombreSala,fecha)) {
             reservas.add(r1);
         }else{
@@ -29,13 +31,13 @@ public class Sala {
         }
     }
 
-    public boolean buscarResIgualTrue(String nombreSala, LocalDateTime fecha){
+    public boolean buscarResIgualTrue(String nombreSala, LocalDateTime fecha) {
         boolean esigual = Administrador.buscarSalaTrue(nombreSala);
-        if (esigual==true) {
+        if (esigual == true) {
             Iterator iterator = reservas.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Reserva r1 = (Reserva) iterator.next();
-                if (r1.getNombreSala().equalsIgnoreCase(nombreSala) && r1.getFechaReserva().equals(fecha)){
+                if (r1.getNombreSala().equalsIgnoreCase(nombreSala) && r1.getFechaReserva().equals(fecha)) {
                     return true;
                 }
             }
@@ -49,7 +51,10 @@ public class Sala {
 
     @Override
     public String toString() {
-        String sala = "Nombre de la sala: " + nombre;
+        String sala = "Sala: " + nombre;
         return sala;
+    }
+    public static boolean compararfechas(LocalDateTime fechaReserva){
+
     }
 }

@@ -5,12 +5,14 @@ public class Reserva {
     private String nombreSala;
     private LocalDateTime fechaReserva;
     private Duration duracionReserva;
+    private String nombreDepartamentoReservador;
 
 
-    public Reserva(String nombreSala, LocalDateTime fechaReserva, Duration duracionReserva){
+    public Reserva(String nombreSala, LocalDateTime fechaReserva, Duration duracionReserva, String nombreDepartamentoReservador){
         this.nombreSala = nombreSala;
         this.fechaReserva = fechaReserva;
         this.duracionReserva = duracionReserva;
+        this.nombreDepartamentoReservador = nombreDepartamentoReservador;
     }
 
     public LocalDateTime getFechaReserva() {
@@ -33,4 +35,6 @@ public class Reserva {
                 ", duracion=" + duracionReserva.toHours() + " horas" +
                 '}';
     }
+
+
 }

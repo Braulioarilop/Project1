@@ -19,7 +19,8 @@ public class Administrador {
             System.out.println("4. \t Crear nueva sala");
             System.out.println("5. \t Eliminar sala");
             System.out.println("6. \t Listar Salas");
-            System.out.println("7. \t Cerrar sesion");
+            System.out.println("7. \t Listar Reservas");
+            System.out.println("8. \t Cerrar sesion");
             opcionAdmin = in.nextLine();
             switch (opcionAdmin) {
                 case "1":
@@ -46,10 +47,13 @@ public class Administrador {
                     break;
                 case "4":
                     String nombresala;
+                    String codSala;
                     System.out.println("Indicame el nombre de la sala");
                     nombresala = in.nextLine();
+                    System.out.println("Indicame el codigo de la sala");
+                    codSala = in.nextLine();
                     if (!buscarSalaTrue(nombresala)){
-                        Sala s1 = new Sala(nombresala);
+                        Sala s1 = new Sala(nombresala,codSala);
                         salas.add(s1);
                     }else{
                         System.out.println("Sala ya existente");
@@ -62,13 +66,16 @@ public class Administrador {
                     if (buscarSalaTrue(salaAEliminar)){
                         salas.remove(buscarSalaID(salaAEliminar));
                     }else{
-                        System.out.println("Sala ya existente");
+                        System.out.println("La sala indicada no existe");
                     }
                     break;
                 case "6":
                     listarSalas();
                     break;
                 case "7":
+                    listarSalasConReservas();
+                    break;
+                case "8":
                     System.out.println("Cerrando sesion...");
                     logout = true;
                     
@@ -155,6 +162,15 @@ public class Administrador {
     public static void listarSalas(){
         for (Object o : salas) {
             System.out.println(o);
+        }
+    }
+    public static void listarSalasConReservas(){
+        Iterator iterator = salas.iterator();
+        while (iterator.hasNext()){
+            if (iterator.next()!=null) {
+                Sala s1 = (Sala) iterator.next();
+                s1.listarReservas();
+            }
         }
     }
 }

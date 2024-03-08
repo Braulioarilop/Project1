@@ -2,6 +2,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Main {
 
+
     public static void menu(){
         Scanner in = new Scanner(System.in);
 
@@ -35,13 +36,14 @@ public class Main {
                     codigoDep = in.nextLine();
                     Departamento d2 = Administrador.buscarCodDep(codigoDep);
                     if (d2!=null){
+                        Departamento.codMenuDep=codigoDep;
                         Departamento.menuDep();
                     }else{
                         System.out.println("Codigo de departamento no existente");
                     }
                     break;
                 case "3":
-                    System.out.println("Saliendo");
+                    System.out.println("...\nSaliendo");
                     salir=true;
                     break;
                 default:
