@@ -1,3 +1,5 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Main {
@@ -53,6 +55,14 @@ public class Main {
         };
     };
     public static void main(String[] args) {
+        Administrador.anadirDep("VENTAS","VEN","A");
+        Sala s1 = new Sala("Sala1","S1");
+        Administrador.salas.add(s1);
+        LocalDateTime fecha = LocalDateTime.of(2024,2,2,9,0);
+        Duration durationDeReserva = Duration.ofHours(3);
+        Reserva r1 = new Reserva("Sala1",fecha,durationDeReserva,"VEN");
+        s1.reservas.add(r1);
             Main.menu();
+
     }
 }

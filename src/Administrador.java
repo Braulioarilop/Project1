@@ -165,13 +165,14 @@ public class Administrador {
         }
     }
     public static void listarSalasConReservas(){
-        Iterator iterator = salas.iterator();
-        while (iterator.hasNext()){
-            if (iterator.next()!=null) {
+            Iterator iterator = salas.iterator();
+            while (iterator.hasNext()) {
                 Sala s1 = (Sala) iterator.next();
-                s1.listarReservas();
+                if (s1 != null) {
+                    s1.listarReservas();
+                }
             }
-        }
+
     }
 }
 
