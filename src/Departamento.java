@@ -20,6 +20,7 @@ public class Departamento {
             System.out.println("1. Añadir reserva");
             System.out.println("2. Cancelar reserva");
             System.out.println("3. Listar todas las reservas");
+            System.out.println("4. Cerrar sesion");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
@@ -32,10 +33,13 @@ public class Departamento {
                 case 3:
 
                     break;
+                case 4:
+                    logout=true;
+                    break;
                 default:
                     System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
-        } while (opcion != 3);
+        } while (!logout);
     }
 
 

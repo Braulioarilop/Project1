@@ -50,6 +50,7 @@ public class Administrador {
                     nombresala = in.nextLine();
                     if (!buscarSalaTrue(nombresala)){
                         Sala s1 = new Sala(nombresala);
+                        salas.add(s1);
                     }else{
                         System.out.println("Sala ya existente");
                     }
@@ -65,6 +66,7 @@ public class Administrador {
                     }
                     break;
                 case "6":
+                    listarSalas();
                     break;
                 case "7":
                     System.out.println("Cerrando sesion...");
