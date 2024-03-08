@@ -15,7 +15,7 @@ public class Main {
             System.out.println("1. Login de administrador");
             System.out.println("2. Login de departamento");
             System.out.println("3. Salir del programa");
-            System.out.println();
+
             opcion = in.nextLine();
 
             switch(opcion){

@@ -75,7 +75,7 @@ public class Administrador {
                     break;
             }
         } while (!logout);
-        in.close();
+        //in.close();
     }
 
     public static void anadirDep(String nombre, String codigo, String representante) {
