@@ -69,6 +69,7 @@ public class Administrador {
                 case "7":
                     System.out.println("Cerrando sesion...");
                     logout = true;
+                    
                     break;
                 default:
                     System.out.println("Opcion de administrador no correcta \n Introduzca una opcion valida");
