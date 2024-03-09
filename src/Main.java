@@ -3,14 +3,11 @@ import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Main {
-
-
     public static void menu(){
         Scanner in = new Scanner(System.in);
 
         //Centinela que nos permitirá salir
         boolean salir = false;
-
 
         System.out.println("Bienvenido a la aplicación \n ¿Como desea acceder?");
         while(!salir){
@@ -52,17 +49,9 @@ public class Main {
                 System.out.println("No has indicado una opcion correcta");
                     break;
             }
-        };
-    };
+        }
+    }
     public static void main(String[] args) {
-        Administrador.anadirDep("VENTAS","VEN","A");
-        Sala s1 = new Sala("Sala1","S1");
-        Administrador.salas.add(s1);
-        LocalDateTime fecha = LocalDateTime.of(2024,2,2,9,0);
-        Duration durationDeReserva = Duration.ofHours(3);
-        Reserva r1 = new Reserva("Sala1",fecha,durationDeReserva,"VEN");
-        s1.reservas.add(r1);
             Main.menu();
-
     }
 }

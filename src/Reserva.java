@@ -5,14 +5,14 @@ public class Reserva {
     private String nombreSala;
     private LocalDateTime fechaReserva;
     private Duration duracionReserva;
-    private String nombreDepartamentoReservador;
+    private String codDepReservador;
 
 
-    public Reserva(String nombreSala, LocalDateTime fechaReserva, Duration duracionReserva, String nombreDepartamentoReservador){
+    public Reserva(String nombreSala, LocalDateTime fechaReserva, Duration duracionReserva, String codDepReservador){
         this.nombreSala = nombreSala;
         this.fechaReserva = fechaReserva;
         this.duracionReserva = duracionReserva;
-        this.nombreDepartamentoReservador = nombreDepartamentoReservador;
+        this.codDepReservador = codDepReservador;
     }
 
     public LocalDateTime getFechaReserva() {
@@ -25,6 +25,10 @@ public class Reserva {
 
     public Duration getDuracion() {
         return duracionReserva;
+    }
+
+    public String getCodDepReservador() {
+        return codDepReservador;
     }
 
     @Override

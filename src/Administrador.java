@@ -172,7 +172,6 @@ public class Administrador {
                     s1.listarReservas();
                 }
             }
-
     }
 }
 

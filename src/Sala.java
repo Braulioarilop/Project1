@@ -51,7 +51,22 @@ public class Sala {
         }
         return false;
     }
-
+    public static Reserva buscarResIgualID(String nombreSala, LocalDateTime fecha) {
+        boolean esigual = Administrador.buscarSalaTrue(nombreSala);
+        if (esigual == true) {
+            Sala s1 = Administrador.buscarSalaID(nombreSala);
+            if (s1.reservas != null) {
+                Iterator iterator = s1.reservas.iterator();
+                while (iterator.hasNext()) {
+                    Reserva r1 = (Reserva) iterator.next();
+                    if (r1.getNombreSala().equalsIgnoreCase(nombreSala) && r1.getFechaReserva().equals(fecha)) {
+                        return r1;
+                    }
+                }
+            }
+        }
+        return null;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -76,5 +91,19 @@ public class Sala {
         }
         return false;
         }
-
+//    public static Reserva retirarReservaID(String nombreSala,LocalDateTime fechaReserva){
+//        Sala s1 = Administrador.buscarSalaID(nombreSala);
+//        if (s1.reservas!=null) {
+//            Iterator iterator = s1.reservas.iterator();
+//            while (iterator.hasNext()) {
+//                Reserva r2 = (Reserva) iterator.next();
+//                if (r2.getFechaReserva().equals(fechaReserva)) {
+//                    return r2;
+//                }else {
+//                    System.out.println("Reserva no encontrada");
+//                }
+//            }
+//        }
+//        return null;
+//    }
 }

@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ public class Departamento {
         boolean logout =false;
         String opcionDep;
         do {
-            System.out.println("\n Menú del Departamento:" + codMenuDep);
+            System.out.println("\n Menú del Departamento: --" + codMenuDep.toUpperCase()+"--");
             System.out.println("1. Añadir reserva");
             System.out.println("2. Cancelar reserva");
             System.out.println("3. Listar todas las reservas");
@@ -28,51 +29,89 @@ public class Departamento {
             opcionDep = in.nextLine();
             switch (opcionDep) {
                 case "1":
-                    String salaAReservar;
-                    LocalDateTime fechaDeReserva;
-                    int mes;
-                    int dia;
-                    int horaR;
-                    int horaD;
-                    Duration durationDeReserva;
-                    System.out.println("Dime la sala en la cual quieras realizar una reserva:");
-                    salaAReservar = in.nextLine();
+                    try {
+                        String salaAReservar;
+                        LocalDateTime fechaDeReserva;
+                        int mes;
+                        int dia;
+                        int horaR;
+                        int horaD;
+                        Duration durationDeReserva;
+                        System.out.println("Dime la sala en la cual quieras realizar una reserva:");
+                        salaAReservar = in.nextLine();
 
-                    if (Administrador.buscarSalaTrue(salaAReservar)){
-                        Sala s1 = Administrador.buscarSalaID(salaAReservar);
+                        if (Administrador.buscarSalaTrue(salaAReservar)) {
+                            Sala s1 = Administrador.buscarSalaID(salaAReservar);
 
-                        System.out.println("Datos de Reserva");
-                        System.out.println("Mes: (Febrero = 2,etc):");
-                        mes= Integer.parseInt(in.nextLine());
-                        System.out.println("Dia: (Numerico)");
-                        dia= Integer.parseInt(in.nextLine());
-                        System.out.println("Hora: (Disponible desde las 9 hasta las 14 horas)");
-                        horaR= Integer.parseInt(in.nextLine());
-                        while (horaR<9 || horaR>14){
-                            System.out.println("Hora de trabajo no disponible");
+                            System.out.println("Datos de Reserva");
+                            System.out.println("Mes: (Febrero = 2,etc):");
+                            mes = Integer.parseInt(in.nextLine());
+                            System.out.println("Dia: (Numerico)");
+                            dia = Integer.parseInt(in.nextLine());
                             System.out.println("Hora: (Disponible desde las 9 hasta las 14 horas)");
-                            horaR= Integer.parseInt(in.nextLine());
-                        }
-                        System.out.println("Duracion de la reserva: ");
-
-                        horaD = Integer.parseInt(in.nextLine());
-                        durationDeReserva = Duration.ofHours(horaD);
-                        fechaDeReserva = LocalDateTime.of(2024,mes,dia,horaR,0);
-                        if (horaD+horaR<=14) {
-                            if (!Sala.compararSiEstaFechaTrue(salaAReservar, fechaDeReserva)) {
-                                s1.reservar(salaAReservar, fechaDeReserva, durationDeReserva, codMenuDep);
-                            } else {
-                                System.out.println("Reserva igual ya existente");
+                            horaR = Integer.parseInt(in.nextLine());
+                            while (horaR < 9 || horaR > 14) {
+                                System.out.println("Hora de trabajo no disponible");
+                                System.out.println("Hora: (Disponible desde las 9 hasta las 14 horas)");
+                                horaR = Integer.parseInt(in.nextLine());
                             }
-                        }else{
-                            System.out.println("La hora de reserva y su duracion ha excedido el tiempo disponible de la sala");
+                            System.out.println("Duracion de la reserva: ");
+
+                            horaD = Integer.parseInt(in.nextLine());
+                            durationDeReserva = Duration.ofHours(horaD);
+                            fechaDeReserva = LocalDateTime.of(2024, mes, dia, horaR, 0);
+                            if (horaD + horaR <= 14) {
+                                if (!Sala.compararSiEstaFechaTrue(salaAReservar, fechaDeReserva)) {
+                                    s1.reservar(salaAReservar, fechaDeReserva, durationDeReserva, codMenuDep);
+                                } else {
+                                    System.out.println("Reserva igual ya existente");
+                                }
+                            } else {
+                                System.out.println("La hora de reserva y su duracion ha excedido el tiempo disponible de la sala");
+                            }
+                        } else {
+                            System.out.println("La sala a reservar no existe");
                         }
-                    }else{
-                        System.out.println("La sala a reservar no existe");
+                    }catch (NumberFormatException nfe){
+                        System.out.println("Formato de fecha/hora no valido (Uso de texto)");
+                    }catch (DateTimeException dte){
+                        System.out.println("La fecha a reservar no existe ");
                     }
                     break;
                 case "2":
-
+                    try {
+                        String salaACancelar;
+                        LocalDateTime fechaDeReserva;
+                        int mes;
+                        int dia;
+                        int horaR;
+                        int horaD;
+                        System.out.println("Datos de Cancelacion");
+                        System.out.println("Dime la sala en la cual quieras cancelar la resrva:");
+                        salaACancelar = in.nextLine();
+                        if (Administrador.buscarSalaTrue(salaACancelar)) {
+                            System.out.println("Mes de la reserva a cancelar: (Junio = 6,etc):");
+                            mes = Integer.parseInt(in.nextLine());
+                            System.out.println("Dia de la reserva a cancelar: (Numerico)");
+                            dia = Integer.parseInt(in.nextLine());
+                            System.out.println("Hora de la reserva a cancelar");
+                            horaR = Integer.parseInt(in.nextLine());
+                            fechaDeReserva = LocalDateTime.of(2024,mes,dia,horaR,0);
+                            if (codMenuDep.equalsIgnoreCase(Sala.buscarResIgualID(salaACancelar,fechaDeReserva).getCodDepReservador())){
+                                Sala s1= Administrador.buscarSalaID(salaACancelar);
+                                Reserva r1 = Sala.buscarResIgualID(salaACancelar,fechaDeReserva);
+                                s1.reservas.remove(r1);
+                            }else{
+                                System.out.println("El departamento que quiere retirar esta reserva no es el mismo que la reservo");
+                            }
+                        }else{
+                            System.out.println("la sala para cancelar la reserva no existe");
+                        }
+                    }catch (NumberFormatException nfe){
+                        System.out.println("Formato de fecha/hora no valido (Uso de texto)");
+                    }catch (DateTimeException dte){
+                        System.out.println("La fecha a reservar no existe ");
+                    }
                     break;
                 case "3":
                         Administrador.listarSalasConReservas();
