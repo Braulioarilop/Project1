@@ -37,6 +37,7 @@ public class Reserva {
                 "nombreSala='" + nombreSala + '\'' +
                 ", fecha=" + fechaReserva +
                 ", duracion=" + duracionReserva.toHours() + " horas" +
+                ", Departamento que reservó: " + codDepReservador +
                 '}';
     }
 

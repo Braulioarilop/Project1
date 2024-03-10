@@ -40,7 +40,40 @@ public class Administrador {
                     String codigopru;
                     System.out.println("Dime el codigo del departamento");
                     codigopru = in.nextLine();
-                    eliminarDep(codigopru);
+
+                    if (buscarCodDep(codigopru) != null) {
+                        Departamento d1 = buscarCodDep(codigopru);
+                        departamentos.remove(d1);
+                        System.out.println("Borrado de departamento exitoso");
+                        Reserva r1;
+                        Reserva r2 = null;
+                        
+                        ArrayList reservasAEliminar = null;
+                        Iterator iteradorSalas = salas.iterator();
+                        
+                        while (iteradorSalas.hasNext()) {
+                            Sala s1 = (Sala) iteradorSalas.next();
+                            if (s1 != null) {
+                                Iterator iteradorReser = s1.reservas.iterator();
+                                while (iteradorReser.hasNext()){
+                                    reservasAEliminar= new ArrayList();
+                                    r1 = (Reserva) iteradorReser.next();
+                                    if (r1!=null){
+                                        if (r1.getCodDepReservador().equalsIgnoreCase(codigopru)){
+                                            reservasAEliminar.add(r1);
+                                        }
+                                    }
+                                }
+                                if (reservasAEliminar!=null){
+                                    s1.reservas.removeAll(reservasAEliminar);
+                                }
+
+                            }
+                        }
+                        System.out.println("Sus reservas se han eliminado correctamente");
+                    } else {
+                        System.out.println("No se a encontrado el departamento");
+                    }
                     break;
                 case "3":
                     listarDep();
@@ -95,18 +128,6 @@ public class Administrador {
         } else {
             System.out.println("Nombre ya existente");
         }
-    }
-
-    public static void eliminarDep(String codigo) {
-        if (buscarCodDep(codigo) != null) {
-            Departamento d1 = buscarCodDep(codigo);
-            departamentos.remove(d1);
-            System.out.println("Borrado exitoso");
-
-        } else {
-            System.out.println("No se a encontrado el departamento");
-        }
-
     }
 
     public static void listarDep() {

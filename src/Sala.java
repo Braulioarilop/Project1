@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Sala {
-    public String nombre;
-    public String codSala;
+    private String nombre;
+    private String codSala;
     public ArrayList reservas;
 
     public Sala(String nombre,String codSala){
@@ -91,19 +91,4 @@ public class Sala {
         }
         return false;
         }
-//    public static Reserva retirarReservaID(String nombreSala,LocalDateTime fechaReserva){
-//        Sala s1 = Administrador.buscarSalaID(nombreSala);
-//        if (s1.reservas!=null) {
-//            Iterator iterator = s1.reservas.iterator();
-//            while (iterator.hasNext()) {
-//                Reserva r2 = (Reserva) iterator.next();
-//                if (r2.getFechaReserva().equals(fechaReserva)) {
-//                    return r2;
-//                }else {
-//                    System.out.println("Reserva no encontrada");
-//                }
-//            }
-//        }
-//        return null;
-//    }
 }
