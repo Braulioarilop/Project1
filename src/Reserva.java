@@ -1,5 +1,6 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Reserva {
     private String nombreSala;
@@ -33,12 +34,11 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva{" +
-                "nombreSala='" + nombreSala + '\'' +
-                ", fecha=" + fechaReserva +
-                ", duracion=" + duracionReserva.toHours() + " horas" +
-                ", Departamento que reservó: " + codDepReservador +
-                '}';
+        DateTimeFormatter f1 = DateTimeFormatter.ofPattern("EEEE, 'dia ' dd ' de ' MMMM ' de ' yyyy ' a las ' hh:mm");
+        return
+                "Reserva:\n\tFecha reservada: " + fechaReserva.format(f1) + "." +
+                "\n\tDuracion: " + duracionReserva.toHours() + " hora/s" +
+                "\n\tDepartamento que reservó: " + codDepReservador.toUpperCase();
     }
 
 

@@ -13,7 +13,7 @@ public class Administrador {
         String opcionAdmin;
         do {
             System.out.println("Acceso: Administrador");
-            System.out.println("1. \t Añdir Departamento");
+            System.out.println("1. \t Añadir Departamento");
             System.out.println("2. \t Eliminar Departamento");
             System.out.println("3. \t Listar Departamentos");
             System.out.println("4. \t Crear nueva sala");
@@ -27,10 +27,10 @@ public class Administrador {
                     String nombre;
                     String codigo;
                     String represent;
-                    System.out.println("Creacion de departamento");
-                    System.out.println("Nombre de departamento");
+                    System.out.println("Bienvenido a la creacion de departamentos");
+                    System.out.println("Nombre de departamento a crear:");
                     nombre = in.nextLine();
-                    System.out.println("Codigo de departamento");
+                    System.out.println("Codigo de departamento que tendrá");
                     codigo = in.nextLine();
                     System.out.println("Representante de departamento");
                     represent = in.nextLine();
@@ -38,7 +38,7 @@ public class Administrador {
                     break;
                 case "2":
                     String codigopru;
-                    System.out.println("Dime el codigo del departamento");
+                    System.out.println("Dime el codigo del departamento a eliminar");
                     codigopru = in.nextLine();
 
                     if (buscarCodDep(codigopru) != null) {
@@ -81,7 +81,8 @@ public class Administrador {
                 case "4":
                     String nombresala;
                     String codSala;
-                    System.out.println("Indicame el nombre de la sala");
+                    System.out.println("Bienvenido a la creacion de Salas");
+                    System.out.println("Indicame el nombre de la sala a crear");
                     nombresala = in.nextLine();
                     System.out.println("Indicame el codigo de la sala");
                     codSala = in.nextLine();
@@ -89,7 +90,7 @@ public class Administrador {
                         Sala s1 = new Sala(nombresala,codSala);
                         salas.add(s1);
                     }else{
-                        System.out.println("Sala ya existente");
+                        System.out.println("Error, sala ya existente");
                     }
                     break;
                 case "5":
@@ -122,11 +123,11 @@ public class Administrador {
     }
 
     public static void anadirDep(String nombre, String codigo, String representante) {
-        if (!buscarNomDep(nombre)) {
+        if (!buscarNomDep(nombre)&&!buscarCodDepTrue(codigo)) {
             Departamento d1 = new Departamento(nombre, codigo, representante);
             departamentos.add(d1);
         } else {
-            System.out.println("Nombre ya existente");
+            System.out.println("Nombre/Codigo ya existente");
         }
     }
 
@@ -145,6 +146,16 @@ public class Administrador {
             }
         }
         return null;
+    }
+    public static boolean buscarCodDepTrue(String codigo) {
+        Iterator iterador = departamentos.iterator();
+        while (iterador.hasNext()){
+            Departamento d1 = (Departamento) iterador.next();
+            if (d1.getCodigo().equalsIgnoreCase(codigo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean buscarNomDep(String nombre) {
@@ -174,6 +185,27 @@ public class Administrador {
         do {
             Sala s1 = (Sala) iterador.next();
             if (s1.getNombre().equalsIgnoreCase(nombre)) {
+                return s1;
+            }
+        } while (iterador.hasNext());
+        return null;
+    }
+    public static boolean buscarCodSalaTrue(String codigo) {
+        Iterator iterador = salas.iterator();
+        while (iterador.hasNext()) {
+            Sala s1 = (Sala) iterador.next();
+            if (s1.getCodSala().equalsIgnoreCase(codigo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Sala buscarCodSalaID(String codigo) {
+        Iterator iterador = salas.iterator();
+        do {
+            Sala s1 = (Sala) iterador.next();
+            if (s1.getCodSala().equalsIgnoreCase(codigo)) {
                 return s1;
             }
         } while (iterador.hasNext());

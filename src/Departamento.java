@@ -30,7 +30,7 @@ public class Departamento {
             switch (opcionDep) {
                 case "1":
                     try {
-                        String salaAReservar;
+                        String codSalaAReservar;
                         LocalDateTime fechaDeReserva;
                         int mes;
                         int dia;
@@ -38,10 +38,10 @@ public class Departamento {
                         int horaD;
                         Duration durationDeReserva;
                         System.out.println("Dime la sala en la cual quieras realizar una reserva:");
-                        salaAReservar = in.nextLine();
+                        codSalaAReservar = in.nextLine();
 
-                        if (Administrador.buscarSalaTrue(salaAReservar)) {
-                            Sala s1 = Administrador.buscarSalaID(salaAReservar);
+                        if (Administrador.buscarCodSalaTrue(codSalaAReservar)) {
+                            Sala s1 = Administrador.buscarCodSalaID(codSalaAReservar);
 
                             System.out.println("Datos de Reserva");
                             System.out.println("Mes: (Febrero = 2,etc):");
@@ -61,8 +61,8 @@ public class Departamento {
                             durationDeReserva = Duration.ofHours(horaD);
                             fechaDeReserva = LocalDateTime.of(2024, mes, dia, horaR, 0);
                             if (horaD + horaR <= 14) {
-                                if (!Sala.compararSiEstaFechaTrue(salaAReservar, fechaDeReserva)) {
-                                    s1.reservar(salaAReservar, fechaDeReserva, durationDeReserva, codMenuDep);
+                                if (!Sala.compararSiEstaFechaTrue(Administrador.buscarCodSalaID(codSalaAReservar).getNombre(), fechaDeReserva)) {
+                                    s1.reservar(Administrador.buscarCodSalaID(codSalaAReservar).getNombre(), fechaDeReserva, durationDeReserva, codMenuDep);
                                 } else {
                                     System.out.println("Reserva igual ya existente");
                                 }
@@ -137,8 +137,8 @@ public class Departamento {
     @Override
     public String toString() {
         String DepartaCom = "Nombre de departamento: "+ nombre +
-                            "\n Codigo de departamento: "+ codigo +
-                            "\n Representante: " + representante;
+                            "\n\t Codigo de departamento: "+ codigo.toUpperCase() +
+                            "\n\t Representante: " + representante;
         return DepartaCom;
     }
 

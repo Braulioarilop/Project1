@@ -8,4 +8,4 @@ Miembros:
 + Braulio Estéfano Arias López
 
 #### Diagrama UML
-![Error al cargar la imagen ](Diagrama_UML.png)
+![Error al cargar la imagen ](Diagrama_UML_PRO.png)

@@ -17,11 +17,15 @@ public class Sala {
     public void reservar(String nombreSala, LocalDateTime fecha, Duration duracion,String nombreDepReservador){
         Reserva r1 = new Reserva(nombreSala,fecha,duracion,nombreDepReservador);
         Sala s1 = Administrador.buscarSalaID(nombreSala);
-        if (!buscarResIgualTrue(nombreSala,fecha)) {
-            s1.reservas.add(r1);
+        if (fecha.getDayOfWeek().getValue()!=6 && fecha.getDayOfWeek().getValue()!=7) {
+            if (!buscarResIgualTrue(nombreSala, fecha)) {
+                s1.reservas.add(r1);
+            } else {
+                System.out.println("Ya hay una reserva esa hora");
+                System.out.println("Proxima reserva disponible dentro de: " + duracion);
+            }
         }else{
-            System.out.println("Ya hay una reserva esa hora");
-            System.out.println("Proxima reserva disponible dentro de: " + duracion);
+            System.out.println("No se puede reservar un Sabado o un Domingo");
         }
     }
 
@@ -69,6 +73,10 @@ public class Sala {
     }
     public String getNombre() {
         return nombre;
+    }
+
+    public String getCodSala() {
+        return codSala;
     }
 
     @Override
